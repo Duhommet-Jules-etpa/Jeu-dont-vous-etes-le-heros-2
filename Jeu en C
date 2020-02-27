@@ -1,0 +1,275 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+
+int a = 1;
+int b = 3;
+
+int rand_a_b(int a, int b){
+			srand( time ( NULL ) );
+			return rand()%(b-a) +a;
+}
+
+
+int main(){
+	int faim = 0;
+	int fatigue = 0;
+  int tour = 13;
+	int nourri = 8;
+	int piece = 8;
+	int vie = 3;
+
+
+printf("Vous incarnez le personnage Perceval \nLe Roi Arthur vous a demandez d'allez chercher le Graal \n\n");
+
+
+
+    while (1){
+	    tour -= 1;
+	    if (tour == 0){
+		    printf("Vous avez trouvez le Graal bravo!! (VICTOIRE)\n");
+		    break;
+	    }
+
+		printf  ("Niveau de faim : %d  Niveau de fatigue : %d \n", faim, fatigue);
+	    printf("  Points de vie : %d \n", vie);
+	    printf("Ressource de piece : %d  Ressource de nourriture : %d \n", piece, nourri);
+
+      int chasse = rand_a_b(1,3);
+  	
+
+        faim += 1;
+		fatigue += 1;
+
+/////////////////////
+
+		if (faim >= 10){
+			printf("Vous n'avez pas reussi a trouver de la nouriture vous etes mort de faim(DEFAITE)\n");
+			break;
+		}
+		if (fatigue >= 10){
+			printf("Vous n'arrivez meme plus a vous lever, vous rester allonger dans l'herbe seul,aucune personne ne viendra vous aider (DEFAITE)\n");
+			break;
+		}
+        if (vie <= 0){
+			printf("Votre succombez Ã  vos blessures (DEFAITE)\n");
+			break;
+		}
+
+        if (nourri <= 0){
+			printf("Vous n'avez plus de nourriture, vous commencez a avoir faim,essayer de trouver en endroit pour manger\n");
+			faim += 2;
+		}
+     
+
+
+
+
+
+            if (tour==12){
+                int choix12 = 0;
+	            printf("JOUR 1 :Votre aventure commence ici,qu'allez vous faire ? : chercher une taverne(1),obtenir de l'or(2), partir chasser(3) ?");
+	    	    scanf("%d", &choix12);
+
+		        if (choix12 == 1){
+
+              printf("Vous arrivez apres quelques heures de marches dans une taverne \n");
+              fatigue += 1;
+            
+	    	    }
+	    	    else if (choix12 == 2){
+		        	printf("Apres avoir tue des gnomes vous repartez chercher votre gain \n");
+			        piece += 1;
+			        fatigue += 1;
+	        	}
+	    	    else if (choix12 == 3){
+              printf("Vous decidez d'allez chasser,vous avez reussi a attraper quelques lapins \n");
+              nourri = nourri + chasse;
+              fatigue += 1;
+		   	    }
+            }
+
+            if (tour==11){
+                int choix11 = 0;
+	            printf("NUIT 1 : Vous mangez quelques provisions puis... ? : vous vous reposez(1),vous continuez de boire(2) ?");
+	    	    scanf("%d", &choix11);
+
+		        if (choix11 == 1){
+		        	printf("Vous avez dormi jusqu'a la fin de matinéé vous etes en pleine forme \n");
+		    	    fatigue -= 3;
+	    	    }
+	    	    else if (choix11 == 2){
+		        	printf("Vous avez passer toute votre soirée a boire , vous vous reveillez extrement fatigué \n");
+			        fatigue += 1;
+	        	}
+            }
+
+			if (tour==10){
+                int choix10 = 0;
+	            printf("JOUR 2 : Vous continuer votre route,qu'allez vous faire : partir chasser(1),tué des goblins(2) \n");
+
+		        if (choix10 == 1){
+		        	printf("Cette fois ci vous arrivez a tué un cerf, vous allez donc pouvoir manger \n");
+		    	    nourri = nourri + chasse;
+              fatigue += 1;
+	    	    }
+	    	    else if (choix10 == 2){
+		        	printf("Vous etes venu a bout de la horde de goblins ,vous revenez vous le marchant  et recuperez votre prime \n");
+			        piece += 1;
+			        fatigue += 1;
+	        	}
+            }
+
+			 if (tour==9){
+                int choix9 = 0;
+	            printf("NUIT 2 : Vous arrivez fatigué de votre journée devant une auberge: Que faites-vous ? :allez dans l'auberge = -3 pieces (1), continuez votre route(2), dormir a la belle étoile(3)");
+	    	    scanf("%d", &choix9);
+
+		        if (choix9 == 1){
+		        	printf("Vous decidez de rentrez dans l'auberge et d'y passer la nuit et d'y manger \n");
+		    	    faim -= 3;
+              piece -= 3;
+	    	    }
+	    	    else if (choix9 == 2){
+		        	printf("Vous continuez votre chemin,determinez par la noble tache que vous devez accomplir \n");
+			        fatigue += 2;
+			 	}
+	            else if (choix9 == 3){
+		        	printf("Vous vous allongez dans l'herbe et dormais profondement \n");
+			        fatigue -= 2;
+			 	}
+            }
+
+			if (tour==8){
+                int choix8 = 0;
+	            printf("JOUR 3 : Vous continuez votre chemin quand tout a coup une meute de loup vous encercle:Que faites vous? Les combattre(1), Fuir(2), Leur donner a manger(3)");
+	    	    scanf("%d", &choix8);
+
+		        if (choix8 == 1){
+		        	printf("Vous decidez de les combattres,vous arrivez a les vaincres malgres une terrible morsure au bras \n");
+		    	    vie -= 1;
+		    	    fatigue += 2;
+	    	    }
+	    	    else if (choix8 == 2){
+		        	printf("Vous commencez a courir de toute vos forces et a arrivez a vous hissez en haut d'un arbre apres quelques heures les loups repartirs \n");
+			       fatigue += 1;
+			 	}
+	            else if (choix8 == 3){
+		        	printf("Vous decidez de jouer la securité et vous commencez a prendre les morceaux de viandes qui vous restez dans votre sac.Vous les lancez le plus loin possibles et partez dans l'autres directions,part chance il ne vous ont pas suivi.Vous vous en etes sorti mais vous etes tres fatigue par cette longue course que vous avez fait \n");
+			 	}
+            }
+            if (tour==7){
+                int choix7 = 0;
+	            printf("NUIT 3 : La nuit commence a tombé:Que faites vous ? : vous vous reposez(1), Vous continuez votre chemin(2) ?");
+	    	    scanf("%d", &choix7);
+
+		        if (choix7 == 1){
+		        	    printf("Vous vous assoupissez tranquilement jusqu'au petit matin \n");
+		    	        fatigue -= 2;
+		                }
+	    	    else if (choix7 == 2){
+		        	printf("Vous avez decidez de continuez votre route malgres votre fatigue vous arrivez devant un chateau abandonné\n");
+			        fatigue += 1;
+	        	}
+            }
+            if (tour==6){
+                int choix6 = 0;
+	            printf("JOUR 4 :Vous arrivez devant un chateau abandonné : y entrer(1), ne pas y allez(2),faire le tour pour voir si il n'y a pas de brigant caché a l'interieur(3)");
+	    	    scanf("%d", &choix6);
+
+		        if (choix6 == 1){
+		        	printf("Vous entrez a l'interieur pensant y trouver un butin mais c'est alors qu'une horde de brigants vous attaques,ils vous blesse mais vous reussissez a leur echapper \n");
+		    	    fatigue += 2;
+               vie -= 1;
+
+	    	    }
+	    	    else if (choix6 == 2){
+		        	printf("vous decidez de passer votre chemin et de continuez votre quete \n");
+
+	        	}
+	    	    else if (choix6 == 3){
+		        	printf("Vous faites le tour de chateau et vous entendez alors des ricanements qui provienne de l'interieur de chateau,comme vous le pensiez cette surrement un repaire vous decidez donc de ne pas y allez \n");
+
+		   	    }
+            }
+
+            if (tour==5){
+                int choix5 = 0;
+	            printf("JOUR 5 :Vous voyer un etranger dans la brume davant vous que voulez vous faires? : s'approcher de lui(1), l'appeler(2), ne rien faire(3)\n");
+	    	    scanf("%d", &choix5);
+
+		        if (choix5 == 1){
+		        	printf("Vous commencez a vous approchez de lui ,plus vous approcher de lui plus vous distingez une forme qui n'est pas celle d'un humain,vous vous approcher encore et il s'avere que ce n'etait qu'un n'abre qui avait vaguement l'apparence d'un humain.Es ce la folie qui vous guetterai?? \n");
+
+	    	    }
+	    	    else if (choix5 == 2){
+		        	printf("Vous ne prennez pas de risque et comencez par l'appeler...aucune reponse,vous réessayeez...vous avez a peine eut le temps de cligné des yeux que la silouhaite avait disparu dans la brum.Vous repartez intriguer par ce qu'il viens de ce passez \n");
+
+
+		   	    }
+            }
+
+            if (tour==4){
+                int choix4 = 0;
+              printf("NUIT 4 :Vous vous reveillez et vous constatez avec effroi qu'on vous a voler vos provisions");
+            nourri -= 2;
+            }
+            if (tour==3){
+                int choix3 = 0;
+	            printf("NUIT 5 :Démoralisé en voyant votre sac de vivre vide,vous vous lancez dans l'unique objectif de trouvez a manger.Vous surveillez les environs et vous voyez une caravane abandonnée,cela pourrat etre un piege mais vous avez si faim.Que faites vous?: y allez(1),continuez votre chemin(2)");
+	    	    scanf("%d", &choix3);
+
+		        if (choix3 == 1){
+		        	printf("Vous foncez a l'interieur de la caravane et vous prennez quelques provisions \n");
+		      nourri +=2;
+	    	    }
+	    	    else if (choix3 == 2){
+		        	printf("Vous ne prennez pas de risque et continuez votre route \n");
+
+	        	}
+            }
+            if (tour==2){
+                int choix2 = 0;
+	            printf("JOUR 6 :Vous arrivez dans un auberge ,vous vous asseyez a une table quand tout a coup un inconnu s'assoit devant vous.C'est un marchant il vous propose : D'échanger 2 de nourriture contre 1 materiel de soin(1), D'echangez 5 d'or contre 3 de nourritures (2), ne rien faire (3) ");
+	    	    scanf("%d", &choix2);
+
+		        if (choix2 == 1){
+		        	printf("Vous effectuez l'échange");
+		    	    nourri -= 3;
+              vie += 1;
+
+	    	    }
+	    	    else if (choix2 == 2){
+		        	printf("Vous effectuez l'échange");
+			        nourri += 3;
+		    	    piece -=5;
+	        	}
+
+		   	    else if (choix2 == 3){
+		        	printf("Le marchand se lève l'air mecontant et repars");
+		   	    }
+            }
+            if (tour==1){
+                int choix1 = 0;
+	            printf("NUIT 3 :Vous etes devant deux endroits ,un tetre a gauche et un sanctuaire a droite:Que faites vous :allez a gauche(1),allez a droite(2) ?");
+	    	    scanf("%d", &choix1);
+
+		        if (choix1 == 1){
+		        	    printf("Vous vous aventures d'un cette endroit lugubre ,vous esquivé les pieges ,vous parvenez a entré dans un piece caché et c'est la que vous l'apercevez... \n");
+		    	        fatigue -= 2;
+		                }
+	    	    
+	    	    else if (choix1 == 2){
+		        	printf("Vous arrivez dans cette endroit qui a l'air d'etre calme et paisible quand tout a coup une horde de bandits vous encercle ne vous offrant qu'un seul choix possible...la mort \n");
+              vie -= 3;
+
+	        	}
+            }
+
+        }
+	}
+
+
